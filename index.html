@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>WorkDesk | Freelancer Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f172a'/><text y='.9em' font-size='70' x='12' fill='%2322d3ee' font-weight='bold'>W</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/base.css"/>
+<script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js",
+      "firebase/analytics": "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js"
+    }
+  }
+</script>
+</head>
+<body><!-- ═══ AUTH SHELL ═══════════════════════════════ -->
+<div id="auth-shell">
+
+  <!-- Left decorative panel -->
+  <div class="auth-left">
+    <div class="a-blob a-blob-1"></div>
+    <div class="a-blob a-blob-2"></div>
+    <div class="a-blob a-blob-3"></div>
+    <div class="al-inner">
+      <div class="al-brand">
+        <div class="brand-mark">W</div>
+        <div><div class="brand-name">WorkDesk</div><div class="brand-sub">Freelancer Hub</div></div>
+      </div>
+      <div>
+        <p class="al-eyebrow">Freelancer Dashboard</p>
+        <h1 class="al-title">Work <span>Smarter,</span><br/>Not Harder.</h1>
+        <p class="al-sub">Your all-in-one hub for projects, clients, tasks, and invoices — beautifully organised.</p>
+      </div>
+      <ul class="al-features">
+        <li class="al-feat"><span class="feat-icon">🗂</span><span>Track projects & deadlines in real time</span></li>
+        <li class="al-feat"><span class="feat-icon">👥</span><span>Organise client contacts effortlessly</span></li>
+        <li class="al-feat"><span class="feat-icon">✅</span><span>Manage tasks with clear priorities</span></li>
+        <li class="al-feat"><span class="feat-icon">💼</span><span>Monitor invoices & billing at a glance</span></li>
+      </ul>
+      <div class="al-preview">
+        <div class="preview-label">Live preview after sign-in</div>
+        <div class="preview-stats">
+          <div class="preview-stat"><strong>4</strong><span>Projects</span></div>
+          <div class="preview-stat"><strong>4</strong><span>Clients</span></div>
+          <div class="preview-stat"><strong>$5,170</strong><span>Revenue</span></div>
+        </div>
+        <svg viewBox="0 0 300 36" width="100%" height="36" style="display:block">
+          <defs>
+            <linearGradient id="pg" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#22d3ee" stop-opacity=".8"/>
+              <stop offset="100%" stop-color="#a78bfa" stop-opacity=".8"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="24" width="300" height="8" rx="4" fill="rgba(255,255,255,.06)"/>
+          <rect x="0" y="24" width="200" height="8" rx="4" fill="url(#pg)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="auth-right">
+    <div class="auth-form-wrap">
+      <div class="auth-logo">
+        <div class="brand-mark" style="width:36px;height:36px;font-size:.9rem">W</div>
+        <div class="brand-name">WorkDesk</div>
+      </div>
+
+      <div id="auth-message" class="auth-msg info hidden"></div>
+
+      <!-- LOGIN -->
+      <div id="login-form" class="form-panel">
+        <div class="form-hd"><h2>Sign in</h2><p>Enter your credentials to access your workspace.</p></div>
+        <button class="google-btn" type="button" id="google-btn">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.36-8.16 2.36-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Continue with Google
+        </button>
+        <div class="divider"><span>or sign in with email</span></div>
+        <form id="form-login" novalidate>
+          <div class="field">
+            <div class="field-label"><label>Email Address</label></div>
+            <input id="login-email" type="email" placeholder="you@example.com" class="field-input"/>
+            <div class="field-error" id="login-email-err"></div>
+          </div>
+          <div class="field">
+            <div class="field-label">
+              <label>Password</label>
+              <button type="button" id="forgot-link" class="link-btn" style="font-size:.82rem">Forgot password?</button>
+            </div>
+            <div class="pw-wrap">
+              <input id="login-password" type="password" placeholder="Enter your password" class="field-input"/>
+              <button type="button" class="pw-toggle" id="login-pw-toggle">Show</button>
+            </div>
+            <div class="field-error" id="login-pw-err"></div>
+          </div>
+          <label class="checkbox-row"><input type="checkbox" id="login-remember"/><span>Remember me for 30 days</span></label>
+          <div id="login-general-err" class="auth-msg error hidden"></div>
+          <button type="submit" class="btn btn-primary full-w" style="padding:14px">Sign In →</button>
+        </form>
+        <p class="auth-switch">Don't have an account? <button type="button" id="show-signup" class="link-btn">Create one →</button></p>
+      </div>
+
+      <!-- SIGNUP -->
+      <div id="signup-form" class="form-panel hidden">
+        <div class="form-hd"><h2>Create account</h2><p>Start managing your freelance work in minutes.</p></div>
+        <form id="form-signup" novalidate>
+          <div class="field">
+            <div class="field-label"><label>Full Name</label></div>
+            <input id="signup-name" type="text" placeholder="Taylor Brooks" class="field-input"/>
+            <div class="field-error" id="signup-name-err"></div>
+          </div>
+          <div class="field">
+            <div class="field-label"><label>Email Address</label></div>
+            <input id="signup-email" type="email" placeholder="you@example.com" class="field-input"/>
+            <div class="field-error" id="signup-email-err"></div>
+          </div>
+          <div class="field">
+            <div class="field-label"><label>Password</label></div>
+            <div class="pw-wrap">
+              <input id="signup-password" type="password" placeholder="8+ chars with letters & numbers" class="field-input"/>
+              <button type="button" class="pw-toggle" id="signup-pw-toggle">Show</button>
+            </div>
+            <div class="strength-meter" id="signup-strength">
+              <div class="strength-bars">
+                <div class="s-bar" id="sb1"></div><div class="s-bar" id="sb2"></div>
+                <div class="s-bar" id="sb3"></div><div class="s-bar" id="sb4"></div>
+              </div>
+              <span class="strength-label" id="strength-lbl"></span>
+            </div>
+            <div class="field-error" id="signup-pw-err"></div>
+          </div>
+          <label class="checkbox-row"><input type="checkbox" id="signup-remember"/><span>Keep me signed in</span></label>
+          <div id="signup-general-err" class="auth-msg error hidden"></div>
+          <button type="submit" class="btn btn-primary full-w" style="padding:14px">Create Account →</button>
+        </form>
+        <p class="auth-switch">Already have an account? <button type="button" id="show-login" class="link-btn">Sign in →</button></p>
+      </div>
+
+      <!-- FORGOT -->
+      <div id="forgot-form" class="form-panel hidden">
+        <div class="form-hd"><h2>Reset password</h2><p>We'll send a secure reset link to your email.</p></div>
+        <form id="form-forgot" novalidate>
+          <div class="field">
+            <div class="field-label"><label>Email Address</label></div>
+            <input id="forgot-email" type="email" placeholder="you@example.com" class="field-input"/>
+            <div class="field-error" id="forgot-email-err"></div>
+          </div>
+          <button type="submit" class="btn btn-primary full-w" style="padding:14px">Send Reset Link</button>
+        </form>
+        <p class="auth-switch"><button type="button" id="back-to-login" class="link-btn">← Back to Sign In</button></p>
+      </div>
+
+      <p class="auth-footer">By continuing you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DASHBOARD SHELL ═══════════════════════════ -->
+<div id="dashboard-shell" class="hidden">
+
+  <!-- Mobile top bar -->
+  <div class="mobile-bar">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="brand-mark" style="width:34px;height:34px;font-size:.88rem">W</div>
+      <span class="brand-name" style="font-size:.95rem">WorkDesk</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="chip-av" id="mobile-avatar" style="width:34px;height:34px;font-size:.78rem;border-radius:10px">TB</div>
+      <button class="hamburger" id="hamburger">☰</button>
+    </div>
+  </div>
+
+  <!-- Sidebar overlay -->
+  <div class="sb-overlay hidden" id="sb-overlay"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="brand-mark" style="width:38px;height:38px;font-size:.95rem">W</div>
+      <div><div class="brand-name">WorkDesk</div><div class="brand-sub">Freelancer Hub</div></div>
+    </div>
+    <div class="sb-label">Navigation</div>
+    <nav>
+      <button class="nav-btn active" data-section="dashboard"><span class="nav-icon">⊞</span><span>Dashboard</span></button>
+      <button class="nav-btn" data-section="projects"><span class="nav-icon">🗂</span><span>Projects</span></button>
+      <button class="nav-btn" data-section="clients"><span class="nav-icon">👥</span><span>Clients</span></button>
+      <button class="nav-btn" data-section="tasks"><span class="nav-icon">✅</span><span>Tasks</span></button>
+      <button class="nav-btn" data-section="invoices"><span class="nav-icon">💼</span><span>Invoices</span></button>
+    </nav>
+    <div class="sb-label" style="margin-top:8px">Account</div>
+    <nav>
+      <button class="nav-btn" data-section="profile"><span class="nav-icon">⚙</span><span>Profile</span></button>
+    </nav>
+    <div class="nav-grow"></div>
+    <div class="sb-user">
+      <div class="sb-avatar" id="sb-avatar">TB</div>
+      <div class="sb-info">
+        <div class="sb-name" id="sb-name">Taylor Brooks</div>
+        <div class="sb-email" id="sb-email">taylor@workdesk.app</div>
+      </div>
+      <button class="sb-logout" id="signout-btn" title="Sign Out">⎋</button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-panel">
+    <!-- Topbar (desktop) -->
+    <div class="topbar">
+      <div>
+        <div class="page-eyebrow">Workspace</div>
+        <h1 class="page-title" id="main-title">Good morning, Taylor 👋</h1>
+      </div>
+      <div class="user-chip">
+        <div class="chip-av" id="chip-av">TB</div>
+        <div>
+          <div class="chip-name" id="chip-name">Taylor Brooks</div>
+          <div class="chip-email" id="chip-email">taylor@workdesk.app</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DASHBOARD SECTION ── -->
+    <section id="section-dashboard" class="section-panel">
+      <div class="dashboard-header-strip">
+        <div>
+          <div class="mini-label">Workspace Overview</div>
+          <h2 class="dashboard-title">Today at a glance</h2>
+        </div>
+        <div class="dashboard-kicker" id="dashboard-kicker">0 active projects</div>
+      </div>
+
+      <div class="stats-grid" id="stats-grid"></div>
+
+      <div class="dashboard-grid">
+        <div class="dashboard-left">
+          <div class="card chart-panel">
+            <div class="panel-hd">
+              <div><div class="panel-title">Revenue Overview</div><div class="panel-sub" id="revenue-sub">No paid invoices yet</div></div>
+              <span class="trend-badge" id="revenue-trend">0%</span>
+            </div>
+            <div class="chart-wrap">
+              <svg id="revenue-chart" viewBox="0 0 600 140" preserveAspectRatio="none"></svg>
+              <div class="chart-tooltip" id="chart-tooltip"></div>
+            </div>
+            <div class="chart-labels"><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span></div>
+            <div class="rev-grid">
+              <div><div class="rev-lbl">Paid</div><div class="rev-val" id="rev-paid">$0</div></div>
+              <div><div class="rev-lbl">Unpaid</div><div class="rev-val" id="rev-unpaid">$0</div></div>
+              <div><div class="rev-lbl">Total</div><div class="rev-val" id="rev-total">$0</div></div>
+            </div>
+          </div>
+
+          <div class="dashboard-lower-grid">
+            <div class="card dashboard-list-card">
+              <div class="panel-hd compact-hd">
+                <div><div class="panel-title">Upcoming Tasks</div><div class="panel-sub">Open work queued next</div></div>
+                <button class="link-btn" type="button" data-open-section="tasks">View all</button>
+              </div>
+              <table class="mini-table" id="dash-tasks"></table>
+            </div>
+            <div class="card dashboard-list-card">
+              <div class="panel-hd compact-hd">
+                <div><div class="panel-title">Invoice Status</div><div class="panel-sub">Paid and unpaid billing</div></div>
+                <button class="link-btn" type="button" data-open-section="invoices">View all</button>
+              </div>
+              <div class="invoice-summary" id="invoice-summary"></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card recent-projects-panel">
+          <div class="panel-hd compact-hd">
+            <div><div class="panel-title">Recent Projects</div><div class="panel-sub">Latest activity</div></div>
+            <button class="link-btn" type="button" data-open-section="projects">View all</button>
+          </div>
+          <table class="mini-table" id="dash-projects"></table>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ── PROJECTS SECTION ── -->
+    <section id="section-projects" class="section-panel hidden">
+      <div class="section-bar">
+        <div><div class="section-title-sm">Projects</div><div class="section-desc">Track active and completed work.</div></div>
+        <div class="section-actions">
+          <div class="search-wrap"><span class="search-icon">⌕</span><input id="proj-search" class="search-input" placeholder="Search projects…"/></div>
+          <button class="btn btn-primary" style="padding:10px 16px" id="add-project-btn">+ Add</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table"><thead><tr><th>Project</th><th>Status</th><th>Deadline</th><th>Actions</th></tr></thead>
+        <tbody id="projects-tbody"></tbody></table>
+      </div>
+    </section>
+
+    <!-- ── CLIENTS SECTION ── -->
+    <section id="section-clients" class="section-panel hidden">
+      <div class="section-bar">
+        <div><div class="section-title-sm">Clients</div><div class="section-desc">Manage your contacts and details.</div></div>
+        <div class="section-actions">
+          <div class="search-wrap"><span class="search-icon">⌕</span><input id="client-search" class="search-input" placeholder="Search clients…"/></div>
+          <button class="btn btn-primary" style="padding:10px 16px" id="add-client-btn">+ Add</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table"><thead><tr><th>Client</th><th>Email</th><th>Company</th><th>Actions</th></tr></thead>
+        <tbody id="clients-tbody"></tbody></table>
+      </div>
+    </section>
+
+    <!-- ── TASKS SECTION ── -->
+    <section id="section-tasks" class="section-panel hidden">
+      <div class="section-bar">
+        <div><div class="section-title-sm">Tasks</div><div class="section-desc">Stay on track with your to-do list.</div></div>
+        <div class="section-actions">
+          <div class="search-wrap"><span class="search-icon">⌕</span><input id="task-search" class="search-input" placeholder="Search tasks…"/></div>
+          <button class="btn btn-primary" style="padding:10px 16px" id="add-task-btn">+ Add</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table"><thead><tr><th>Task</th><th>Status</th><th>Due</th><th>Actions</th></tr></thead>
+        <tbody id="tasks-tbody"></tbody></table>
+      </div>
+    </section>
+
+    <!-- ── INVOICES SECTION ── -->
+    <section id="section-invoices" class="section-panel hidden">
+      <div class="section-bar">
+        <div><div class="section-title-sm">Invoices</div><div class="section-desc">Track billing and payments.</div></div>
+        <div class="section-actions">
+          <div class="search-wrap"><span class="search-icon">⌕</span><input id="inv-search" class="search-input" placeholder="Search invoices…"/></div>
+          <button class="btn btn-primary" style="padding:10px 16px" id="add-invoice-btn">+ Add</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table"><thead><tr><th>Invoice</th><th>Client</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="invoices-tbody"></tbody></table>
+      </div>
+    </section>
+
+    <!-- ── PROFILE SECTION ── -->
+    <section id="section-profile" class="section-panel hidden">
+      <div class="profile-hd">
+        <div class="profile-av" id="profile-avatar">TB</div>
+        <div class="profile-meta">
+          <h3 id="profile-name">Taylor Brooks</h3>
+          <p id="profile-email">taylor@workdesk.app</p>
+          <p style="font-size:.8rem;color:var(--dim);margin-top:4px">Freelancer since 2022</p>
+        </div>
+      </div>
+      <div class="profile-stats-grid">
+        <div class="ps-card"><div class="ps-val" id="ps-projects">0</div><div class="ps-key">Projects</div></div>
+        <div class="ps-card"><div class="ps-val" id="ps-clients">0</div><div class="ps-key">Clients</div></div>
+        <div class="ps-card"><div class="ps-val" id="ps-tasks">0</div><div class="ps-key">Tasks</div></div>
+        <div class="ps-card"><div class="ps-val" id="ps-invoices">0</div><div class="ps-key">Invoices</div></div>
+      </div>
+      <div class="profile-edit">
+        <h3>Edit Profile</h3>
+        <div class="profile-grid">
+          <div class="field">
+            <div class="field-label"><label>Full Name</label></div>
+            <input id="p-name" class="field-input" type="text"/>
+          </div>
+          <div class="field">
+            <div class="field-label"><label>Email Address</label></div>
+            <input id="p-email" class="field-input" type="email"/>
+          </div>
+          <div class="field">
+            <div class="field-label"><label>Job Title</label></div>
+            <input id="p-title" class="field-input" type="text" placeholder="e.g. UI/UX Designer"/>
+          </div>
+          <div class="field">
+            <div class="field-label"><label>Location</label></div>
+            <input id="p-location" class="field-input" type="text" placeholder="e.g. London, UK"/>
+          </div>
+        </div>
+        <div style="margin-top:20px;display:flex;gap:12px">
+          <button class="btn btn-primary" id="save-profile-btn" style="padding:12px 22px">Save Changes</button>
+          <button class="btn btn-ghost" id="cancel-profile-btn" style="padding:12px 20px">Cancel</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ═══ MODAL ═══════════════════════════════════ -->
+<div class="modal-overlay hidden" id="modal-overlay">
+  <div class="modal" id="modal-box">
+    <div class="modal-header">
+      <h3 id="modal-title">Add</h3>
+      <button class="modal-close" id="modal-close">×</button>
+    </div>
+    <div id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
